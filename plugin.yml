@@ -1,1 +1,9 @@
 
+name: YourPlugin
+version: 1.0.0
+api: 5.3.0
+main: rich\rich
+commands:
+  abc:
+    description: Выдает 64 алмазных блока игроку
+    permission: abc.commad
