@@ -1,1 +1,31 @@
 
+namespace rich;
+
+use pocketmine\command\Command;
+use pocketmine\command\CommandSender;
+use pocketmine\item\Item;
+use pocketmine\Player;
+use pocketmine\plugin\PluginBase;
+
+class Main extends PluginBase {
+
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
+        if ($command->getName() === "ABC") {
+            if ($sender instanceof Player) {
+                if (!$sender->hasPermission("abc.use")) {
+                    $sender->sendMessage("You have received 64 diamond blocks!");
+                    $sender->getInventory()->addItem(Item::get(Item::DIAMOND_BLOCK, 0, 64));
+                    $sender->addAttachment($this, "abc.use");
+                    return true;
+                } else {
+                    $sender->sendMessage("You have already used this command!");
+                    return true;
+                }
+            } else {
+                $sender->sendMessage("This command can only be used in-game!");
+                return true;
+            }
+        }
+        return false;
+    }
+}
